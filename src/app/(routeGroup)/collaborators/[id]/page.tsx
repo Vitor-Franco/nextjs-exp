@@ -1,7 +1,21 @@
+import type { Metadata } from "next";
+
 interface Props {
 	params: Promise<{
 		id: string;
 	}>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const routeParams = await params;
+	const user = await fetch(
+		`https://jsonplaceholder.typicode.com/users/${routeParams.id}`,
+	).then((res) => res.json());
+	
+	return {
+		title: `${user.name} | ${user.company.name}`,
+		description: `Conheça o usuário ${user.name} - ${user.company.name}`,
+	};
 }
 
 export default async function Collaborator({ params }: Readonly<Props>) {

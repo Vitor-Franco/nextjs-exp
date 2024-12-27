@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+	title: "Uusários colaboradores da aplicação | Company",
+	description: "Lista de usuários colaboradores da aplicação",
+};
 
 export default async function Collaborators() {
 	await new Promise((resolve) => setTimeout(resolve, 500));
-	const result = await fetch("https://jsonplaceholder.typicode.com/users")
-		.then((res) => res.json());
+	const result = await fetch("https://jsonplaceholder.typicode.com/users").then(
+		(res) => res.json(),
+	);
 
 	return (
 		<div>
